@@ -1,0 +1,7 @@
+dist/
+node_modules/
+resources/cpptools-proxy/
+.DS_Store
+*.vsix
+*.tgz
+.DS_Store

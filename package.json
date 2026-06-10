@@ -1,0 +1,129 @@
+{
+  "name": "cpptools-proxy-patcher",
+  "displayName": "C/C++ Tools Proxy Patcher",
+  "description": "Explicit, reversible local patcher that installs cpptools-proxy in front of the Microsoft C/C++ language server for VS Code forks.",
+  "version": "1.0.0",
+  "publisher": "embedd-team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Avlaak/cpptools-proxy-patcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Avlaak/cpptools-proxy-patcher/issues"
+  },
+  "homepage": "https://github.com/Avlaak/cpptools-proxy-patcher",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "cpptools",
+    "c++",
+    "c",
+    "lsp",
+    "proxy",
+    "vscodium",
+    "cursor",
+    "openvsx"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cpptoolsProxyPatcher.patch",
+        "title": "Patch C/C++ Tools Proxy",
+        "category": "C/C++ Tools Proxy",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "cpptoolsProxyPatcher.restore",
+        "title": "Restore C/C++ Tools",
+        "category": "C/C++ Tools Proxy",
+        "icon": "$(debug-reverse-continue)"
+      },
+      {
+        "command": "cpptoolsProxyPatcher.status",
+        "title": "Show C/C++ Tools Proxy Status",
+        "category": "C/C++ Tools Proxy",
+        "icon": "$(info)"
+      },
+      {
+        "command": "cpptoolsProxyPatcher.refreshStatus",
+        "title": "Refresh C/C++ Tools Proxy Status",
+        "category": "C/C++ Tools Proxy",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "cpptoolsProxyPatcher.checkUpdates",
+        "title": "Check for Updates",
+        "category": "C/C++ Tools Proxy",
+        "icon": "$(cloud-download)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "cpptoolsProxyPatcher.patch",
+          "when": "cpptoolsProxyPatcher.patchable"
+        },
+        {
+          "command": "cpptoolsProxyPatcher.restore",
+          "when": "cpptoolsProxyPatcher.restorable"
+        },
+        {
+          "command": "cpptoolsProxyPatcher.status"
+        },
+        {
+          "command": "cpptoolsProxyPatcher.refreshStatus"
+        },
+        {
+          "command": "cpptoolsProxyPatcher.checkUpdates"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "C/C++ Tools Proxy Patcher",
+      "properties": {
+        "CpptoolsProxyPatcher.autoCheckUpdates": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically check for extension updates on startup",
+          "scope": "application"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "prepare-proxy-assets": "node scripts/prepare-proxy-assets.js",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "vscode:prepublish": "npm run prepare-proxy-assets && npm run package",
+    "lint": "eslint src",
+    "check": "tsc -p . --noEmit",
+    "vsix": "vsce package",
+    "openvsx:package": "npm run vsix",
+    "openvsx:publish": "npm run prepare-proxy-assets && ovsx publish"
+  },
+  "devDependencies": {
+    "@types/node": "22.x",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.6.1",
+    "eslint": "^9.39.1",
+    "ovsx": "^1.0.0",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.3",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1"
+  }
+}

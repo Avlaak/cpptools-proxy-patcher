@@ -1,0 +1,59 @@
+// See https://go.microsoft.com/fwlink/?LinkId=733558
+// for the documentation about the tasks.json format
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"label": "tasks: watch",
+			"script": "watch",
+			"problemMatcher": "$ts-webpack-watch",
+			"isBackground": true,
+			"presentation": {
+				"reveal": "never",
+				"group": "watchers"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "npm",
+			"label": "tasks: watch-tests-tsc",
+			"script": "watch-tests",
+			"problemMatcher": "$tsc-watch",
+			"isBackground": true,
+			"presentation": {
+				"reveal": "never",
+				"group": "watchers"
+			},
+			"group": "build"
+		},
+		{
+			"label": "tasks: watch-tests",
+			"dependsOn": [
+				"tasks: watch",
+				"tasks: watch-tests-tsc"
+			],
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "tasks: install dependencies",
+			"command": "npm",
+			"args": [
+				"install"
+			],
+			"problemMatcher": [],
+			"detail": "Install npm dependencies"
+		},
+		{
+			"type": "npm",
+			"label": "tasks: package extension",
+			"script": "vsix_package",
+			"problemMatcher": [],
+			"detail": "Create extension VSIX package"
+		}
+	]
+}
