@@ -1,5 +1,8 @@
 # C/C++ Tools Proxy Patcher
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Open VSX](https://img.shields.io/badge/Open%20VSX-Published-green)](https://open-vsx.org/extension/embedd-team/cpptools-proxy-patcher)
+
 An explicit, reversible local patcher for Microsoft C/C++ Tools.
 
 This extension installs [`cpptools-proxy`](https://github.com/matu6968/cpptools-proxy) in front of the Microsoft C/C++ language server by replacing the local `cpptools` launcher inside the installed `ms-vscode.cpptools` extension. The proxy rewrites the LSP `initialize` request `clientInfo.name` to `Visual Studio Code` before forwarding messages to the original language server.
